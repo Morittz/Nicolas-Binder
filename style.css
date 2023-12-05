@@ -1,0 +1,150 @@
+body {
+    font-size: 16px;
+    line-height: 1.5em;
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    background-color: #060715;
+}
+
+.section {
+    padding: 5rem 0;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+a {
+    font-size: 1rem;
+    color: white;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 200ms;
+}
+
+a:hover {
+    color: #888ABB;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+
+.logo {
+    width: 160px;
+}
+
+.nav-wrappper {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem; 
+}
+
+h1 {
+    font-size: 8rem;
+    line-height: 100%;
+    font-weight: 700;
+    letter-spacing: -3%;
+    text-transform: uppercase;
+    padding-bottom: 1rem;
+    margin: 0;
+}
+
+h2 {
+    font-size: 3.5rem;
+    line-height: 100%;
+    font-weight: 700;
+    letter-spacing: -3%;
+    text-transform: uppercase;
+    padding-bottom: 2.5rem;
+    margin: 0;
+}
+
+h3 {
+    font-size: 2rem;
+    line-height: 100%;
+    font-weight: 700;
+    letter-spacing: -1px;
+    padding-bottom: 1rem;
+    margin: 0.75rem 0 0 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.btn-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem 0 0 0;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: transparent;
+    border: 1px solid white;
+    cursor: pointer;
+    
+    font-size: 1rem;
+    color: white;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    transition: all 200ms;
+}
+
+button:hover {
+    border: 1px solid #888ABB;
+    background-color: #888ABB;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.disco-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; 
+}
+
+.disco-img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.5rem;
+}
+
+.song-link-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: opacity 200ms;
+    cursor: pointer;
+}
+
+.song-link-wrapper:hover {
+    opacity: 80%;
+}
+
+.icon {
+    width: 1.5rem;
+}
