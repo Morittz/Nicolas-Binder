@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolas Binder | Electro & Techno DJ/Producer</title>
+    <meta name="description" content="Offizielle Website von Nicolas Binder. Entdecke neue Musik, kommende Gigs und mehr aus der Welt des Electro & Techno.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS Reset & Grundsetup --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --primary-text-color: #e0e0e0;
+            --secondary-text-color: #888;
+            --accent-silver: #c0c0c0;
+            --accent-silver-glow: rgba(192, 192, 192, 0.4);
+            --card-bg: #1a1a1a;
+            --border-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Offset for fixed header */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Typografie & Helferklassen --- */
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-silver);
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            color: var(--bg-color);
+            background-color: var(--accent-silver);
+            border: 2px solid var(--accent-silver);
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-silver);
+            box-shadow: 0 0 15px var(--accent-silver-glow);
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-svg {
+            width: 50px;
+            height: 50px;
+        }
+        .logo-svg .ring {
+            stroke: var(--accent-silver);
+            stroke-width: 8;
+            fill: none;
+            filter: drop-shadow(0 0 5px var(--accent-silver-glow));
+        }
+        .logo-svg .lion {
+            fill: var(--accent-silver);
+             filter: drop-shadow(0 0 5px var(--accent-silver-glow));
+        }
+
+        .logo-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary-text-color);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--primary-text-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding-bottom: 5px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-silver);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle { display: none; }
+
+
+        /* --- Hero Section --- */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle, #181818 0%, var(--bg-color) 70%);
+            padding-top: 80px; /* Header offset */
+        }
+        
+        .hero-logo {
+            width: 150px;
+            margin-bottom: 1rem;
+        }
+
+        #hero h1 {
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 0 0 20px var(--accent-silver-glow);
+        }
+        #hero p {
+            font-size: 1.2rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 2rem;
+        }
+
+        /* --- Musik Section --- */
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .song-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .song-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 15px var(--accent-silver-glow);
+        }
+
+        /* --- Gigs Section --- */
+        .gigs-container {
+            display: flex;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        .gigs-column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .gig-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .gig-item:last-child {
+            border-bottom: none;
+        }
+        .gig-info {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .gig-date {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-silver);
+            border: 1px solid var(--accent-silver);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .gig-date span { display: block; }
+        .date-day { font-size: 1.5rem; }
+        .date-month { font-size: 0.9rem; text-transform: uppercase; }
+        
+        .gig-details .venue { font-weight: 700; font-size: 1.1rem; }
+        .gig-details .city { color: var(--secondary-text-color); }
+        .gig-item.past .btn {
+            background-color: var(--border-color);
+            border-color: var(--border-color);
+            color: var(--secondary-text-color);
+            cursor: not-allowed;
+        }
+        .gig-item.past .gig-info {
+            opacity: 0.6;
+        }
+        .gig-item.past .btn:hover {
+            box-shadow: none;
+        }
+
+
+        /* --- About Section --- */
+        #about .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        #about .about-image {
+            flex: 1;
+            max-width: 400px;
+        }
+        #about .about-image img {
+            width: 100%;
+            border-radius: 50%;
+            border: 5px solid var(--border-color);
+            filter: grayscale(80%) contrast(110%);
+        }
+        #about .about-text {
+            flex: 1.5;
+        }
+
+        /* --- Instagram Section --- */
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .insta-post {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .insta-post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .insta-post:hover img {
+            transform: scale(1.1);
+        }
+        .insta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .insta-post:hover .insta-overlay {
+            opacity: 1;
+        }
+        .insta-overlay svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+
+        .instagram-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        /* --- Footer --- */
+        footer {
+            background-color: #000;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        .social-links a {
+            margin: 0 15px;
+            display: inline-block;
+        }
+        .social-links svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--secondary-text-color);
+            transition: fill 0.3s ease, transform 0.3s ease;
+        }
+        .social-links a:hover svg {
+            fill: var(--accent-silver);
+            transform: translateY(-3px);
+        }
+        footer p {
+            margin-top: 1.5rem;
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            #about .about-content { flex-direction: column; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem; }
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 71px; /* Höhe des Headers */
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background-color: var(--bg-color);
+                text-align: center;
+                border-top: 1px solid var(--border-color);
+            }
+            nav ul.active { display: flex; }
+            nav li { padding: 1rem 0; width: 100%;}
+
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+                background: none;
+                border: none;
+            }
+            .menu-toggle .bar {
+                display: block;
+                width: 25px;
+                height: 3px;
+                margin: 5px auto;
+                background-color: var(--primary-text-color);
+                transition: all 0.3s ease-in-out;
+            }
+            .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+            .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            .gigs-container { flex-direction: column; }
+            .gig-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .gig-ticket { align-self: flex-start; margin-top: 1rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ================== HEADER ================== -->
+    <header>
+        <a href="#hero" class="logo-container">
+            <!-- Platzhalter SVG für das Logo -->
+            <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Ringe -->
+                <circle class="ring" cx="30" cy="50" r="20"/>
+                <circle class="ring" cx="70" cy="50" r="20"/>
+                <circle class="ring" cx="50" cy="35" r="25"/>
+                <!-- Vereinfachte Löwen-Silhouette (als Beispiel) -->
+                <path class="lion" d="M50 45 Q45 55, 50 60 Q55 55, 50 45 Z" />
+            </svg>
+            <span class="logo-name">Nicolas Binder</span>
+        </a>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#music" class="nav-link">Musik</a></li>
+                <li><a href="#gigs" class="nav-link">Gigs</a></li>
+                <li><a href="#about" class="nav-link">Über Mich</a></li>
+                <li><a href="#instagram" class="nav-link">Socials</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menü öffnen/schließen">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
+
+    <main>
+        <!-- ================== HERO SECTION ================== -->
+        <section id="hero" class="visible">
+             <svg class="logo-svg hero-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle class="ring" cx="30" cy="50" r="20"/>
+                <circle class="ring" cx="70" cy="50" r="20"/>
+                <circle class="ring" cx="50" cy="35" r="25"/>
+                <path class="lion" d="M50 45 Q45 55, 50 60 Q55 55, 50 45 Z" />
+            </svg>
+            <h1>Nicolas Binder</h1>
+            <p>DJ & Producer | Electro / Techno</p>
+            <a href="#music" class="btn">Hör rein</a>
+        </section>
+
+        <!-- ================== MUSIK SECTION ================== -->
+        <section id="music">
+            <div class="container">
+                <h2>Musik</h2>
+                <div class="music-grid">
+                    <!-- Song 1 -->
+                    <div class="song-card">
+                        <iframe style="border-radius:8px 8px 0 0;" src="https://open.spotify.com/embed/track/3n32sLg9iQyCTv0p5wL47g?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                    <!-- Song 2 -->
+                    <div class="song-card">
+                        <iframe style="border-radius:8px 8px 0 0;" src="https://open.spotify.com/embed/track/4uUG5RXr082T2PScbJuV52?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                    <!-- Song 3 -->
+                    <div class="song-card">
+                        <iframe style="border-radius:8px 8px 0 0;" src="https://open.spotify.com/embed/track/2G2Z114v44521I2pB9y95x?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                     <!-- Song 4 -->
+                     <div class="song-card">
+                        <iframe style="border-radius:8px 8px 0 0;" src="https://open.spotify.com/embed/track/59h0a2iKH10pROh9iF5bYI?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================== GIGS SECTION ================== -->
+        <section id="gigs">
+            <div class="container">
+                <h2>Gigs</h2>
+                <div class="gigs-container">
+                    <div class="gigs-column">
+                        <h3>Bevorstehende Events</h3>
+                        <!-- Gig 1 -->
+                        <div class="gig-item">
+                            <div class="gig-info">
+                                <div class="gig-date">
+                                    <span class="date-day">28</span>
+                                    <span class="date-month">DEZ</span>
+                                </div>
+                                <div class="gig-details">
+                                    <div class="venue">Watergate</div>
+                                    <div class="city">Berlin, DE</div>
+                                </div>
+                            </div>
+                            <div class="gig-ticket">
+                                <a href="#" class="btn" target="_blank">Tickets</a>
+                            </div>
+                        </div>
+                         <!-- Gig 2 -->
+                         <div class="gig-item">
+                            <div class="gig-info">
+                                <div class="gig-date">
+                                    <span class="date-day">15</span>
+                                    <span class="date-month">JAN</span>
+                                </div>
+                                <div class="gig-details">
+                                    <div class="venue">Bootshaus</div>
+                                    <div class="city">Köln, DE</div>
+                                </div>
+                            </div>
+                            <div class="gig-ticket">
+                                <a href="#" class="btn" target="_blank">Info</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gigs-column">
+                        <h3>Vergangene Events</h3>
+                         <!-- Past Gig 1 -->
+                         <div class="gig-item past">
+                            <div class="gig-info">
+                                <div class="gig-date">
+                                    <span class="date-day">12</span>
+                                    <span class="date-month">OKT</span>
+                                </div>
+                                <div class="gig-details">
+                                    <div class="venue">Elektroküche</div>
+                                    <div class="city">Köln, DE</div>
+                                </div>
+                            </div>
+                            <div class="gig-ticket">
+                                <a class="btn">Ausverkauft</a>
+                            </div>
+                        </div>
+                        <!-- Past Gig 2 -->
+                        <div class="gig-item past">
+                            <div class="gig-info">
+                                <div class="gig-date">
+                                    <span class="date-day">05</span>
+                                    <span class="date-month">SEP</span>
+                                </div>
+                                <div class="gig-details">
+                                    <div class="venue">Tanzhaus West</div>
+                                    <div class="city">Frankfurt, DE</div>
+                                </div>
+                            </div>
+                            <div class="gig-ticket">
+                                <a class="btn">Archiv</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ================== ÜBER MICH SECTION ================== -->
+        <section id="about">
+            <div class="container">
+                <h2>Über Mich</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="https://placehold.co/400x400/1a1a1a/c0c0c0?text=Nicolas" alt="Portrait von Nicolas Binder">
+                    </div>
+                    <div class="about-text">
+                        <h3>Klangwelten. Bass. Energie.</h3>
+                        <p>Seit über einem Jahrzehnt ist Nicolas Binder eine feste Größe in der elektronischen Musikszene. Geboren in der pulsierenden Techno-Metropole Berlin, fand er schon früh seine Leidenschaft für treibende Rhythmen und hypnotische Melodien.</p>
+                        <p>Seine Sets sind eine Reise – von düsteren, industriellen Klängen bis hin zu euphorischen Electro-Hymnen. Jeder Track ist sorgfältig ausgewählt, um eine einzigartige Atmosphäre zu schaffen, die das Publikum fesselt und nicht mehr loslässt. Als Produzent verbindet er analoge Wärme mit digitaler Präzision, um einen Sound zu kreieren, der sowohl zeitlos als auch innovativ ist.</p>
+                        <p>Jenseits der Decks ist Nicolas ein unermüdlicher Entdecker neuer Sounds, immer auf der Suche nach dem perfekten Beat, der die Nacht unvergesslich macht.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================== INSTAGRAM SECTION ================== -->
+        <section id="instagram">
+            <div class="container">
+                <h2>Instagram Feed</h2>
+                <div class="instagram-grid">
+                    <!-- Ersetze die Links und Bilder durch deine echten Posts -->
+                    <a href="#" target="_blank" class="insta-post">
+                        <img src="https://placehold.co/400x400/000000/ffffff?text=Studio" alt="Instagram Post 1">
+                        <div class="insta-overlay">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                        </div>
+                    </a>
+                    <a href="#" target="_blank" class="insta-post">
+                        <img src="https://placehold.co/400x400/c0c0c0/000000?text=Live+Gig" alt="Instagram Post 2">
+                        <div class="insta-overlay">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                        </div>
+                    </a>
+                    <a href="#" target="_blank" class="insta-post">
+                       <img src="https://placehold.co/400x400/333333/eeeeee?text=Artwork" alt="Instagram Post 3">
+                        <div class="insta-overlay">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                        </div>
+                    </a>
+                </div>
+                <div class="instagram-cta">
+                    <a href="#" class="btn" target="_blank">Folge mir auf Instagram</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================== FOOTER ================== -->
+    <footer>
+        <div class="social-links">
+            <!-- Spotify -->
+            <a href="#" target="_blank" aria-label="Spotify">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm100.3 361.3c-1.2 2.5-4.2 3.8-6.8 2.5-32.3-19.8-72.4-24.3-120.4-13.6-2.9 .6-6-1.2-6.6-4.1-.6-2.9 1.2-6 4.1-6.6 52.1-11.5 97.4-6.5 133.8 15.1 2.6 1.5 3.8 4.7 2.5 7.2zm10.5-47.5c-1.5 3-5.2 4.2-8.2 2.8-36.8-22.1-91-28.5-149.8-15.5-3.5 .8-7.1-1.4-7.9-4.9-.8-3.5 1.4-7.1 4.9-7.9 64-14 123.4-6.9 165.5 17.8 3 1.5 4.2 5.2 2.5 8.2zm12.5-48.8c-1.8 3.6-6.2 4.8-9.8 3-43.1-26.2-115.8-32.3-170.4-17.6-4.3 1.2-8.9-1.1-10.1-5.4s1.1-8.9 5.4-10.1c60.3-16.1 138.8-9.6 187.8 19.5 3.6 1.8 4.8 6.2 3 9.6z"/></svg>
+            </a>
+            <!-- Instagram -->
+             <a href="#" target="_blank" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+            </a>
+            <!-- SoundCloud -->
+            <a href="#" target="_blank" aria-label="SoundCloud">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M117.2 331.8c-1.3-1.7-3.9-2-5.3-1-31.4 20.4-69.5 31.3-111.9 31.3-1.9 0-3.6 1.6-3.6 3.6v45.2c0 2 1.6 3.6 3.6 3.6h111.9c42.4 0 80.5-10.9 111.9-31.3 1.3-1.7.9-4.3-1-5.3L117.2 331.8zM0 206.2c0-2.1 1.6-3.8 3.6-3.8h21.4c1.9 0 3.6 1.6 3.6 3.6v113.1c0 2-1.6 3.6-3.6 3.6H3.6c-2 0-3.6-1.6-3.6-3.6V206.2zm48.6-3.8h21.4c2 0 3.6 1.7 3.6 3.8v113.1c0 2-1.6 3.6-3.6 3.6H48.6c-2 0-3.6-1.6-3.6-3.6V206.2c0-2.1 1.6-3.8 3.6-3.8zm48.6-3.8h21.4c2 0 3.6 1.7 3.6 3.8v113.1c0 2-1.6 3.6-3.6 3.6H97.2c-2 0-3.6-1.6-3.6-3.6V206.2c0-2.1 1.6-3.8 3.6-3.8zm360-156.4c-81.7 0-147.8 66.2-147.8 147.8 0 81.7 66.2 147.8 147.8 147.8s147.8-66.2 147.8-147.8S488.3 42.2 406.6 42.2zM150.3 202.3h21.4c2 0 3.6 1.7 3.6 3.8v113.1c0 2-1.6 3.6-3.6 3.6h-21.4c-2 0-3.6-1.6-3.6-3.6V206.2c0-2.1 1.6-3.8 3.6-3.8zm48.6-3.8h21.4c2 0 3.6 1.7 3.6 3.8v113.1c0 2-1.6 3.6-3.6 3.6h-21.4c-2 0-3.6-1.6-3.6-3.6V206.2c0-2.1 1.6-3.8 3.6-3.8z"/></svg>
+            </a>
+        </div>
+        <p>&copy; <span id="year"></span> Nicolas Binder. Alle Rechte vorbehalten.</p>
+        <p>Booking & Anfragen: <a href="mailto:booking@nicolasbinder.com" style="color: var(--secondary-text-color); text-decoration: underline;">booking@nicolasbinder.com</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Toggle ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('is-active');
+                navMenu.classList.toggle('active');
+            });
+
+            // --- Close mobile menu on link click ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu.classList.contains('active')) {
+                        menuToggle.classList.remove('is-active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+            });
+
+
+            // --- Intersection Observer for fade-in animations ---
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // --- Active Nav Link on Scroll ---
+            const sectionAll = document.querySelectorAll('section[id]');
+            const navLinkObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.nav-link.active').forEach(link => link.classList.remove('active'));
+                        const id = entry.target.getAttribute('id');
+                        const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, { rootMargin: "-30% 0px -70% 0px" });
+
+            sectionAll.forEach(section => {
+                navLinkObserver.observe(section);
+            });
+
+
+            // --- Update Copyright Year ---
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+        });
+    </script>
+</body>
+</html>
